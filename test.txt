@@ -1,1 +1,1 @@
-test.
+https://python-course.readthedocs.io/projects/year1/en/latest/lessons/20-pygame.html
