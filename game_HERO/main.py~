@@ -1,0 +1,19 @@
+from hero import Hero
+
+
+def main():
+    name = input('Как зовут тебя, воин?')
+    hero.level = 1
+    hero.strength = 5
+    hero.agility = 3
+    hero.health = 5
+
+    hero = Hero(name, level, health, strength, agility)
+
+    print(f'{hero.name}, здравствуй!')
+    print(f'{hero.health} это твое здоровье')
+    hero.health = 2
+
+    print(f'{hero.health} теперь вот такое твоё здоровье')
+
+main()
