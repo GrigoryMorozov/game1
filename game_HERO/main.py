@@ -1,19 +1,25 @@
-from hero import Hero
+import pygame
+import sys
+import time
+
+pygame.init()
+
+screen = pygame.display.set_mode((800, 400))
+font = pygame.font.Font(None, 20)
 
 
-def main():
-    name = input('Как зовут тебя, воин?')
-    level = 1
-    strength = 5
-    agility = 3
-    health = 5
-
-    hero = Hero(name, level, health, strength, agility)
-
-    print(f'{hero.name}, здравствуй!')
-    print(f'{hero.health} это твое здоровье')
-    hero.health = 2
-
-    print(f'{hero.health} теперь вот такое твоё здоровье')
-
-main()
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        rep = 'hello'
+        text1 = font.render(rep, True, (0, 100, 0))
+        place1 = text1.get_rect(center=(200, 150))
+        screen.blit(text1, place1)
+        pygame.display.update()
+        time.sleep(2)
+        rep = 'Me'
+        screen.blit(text1, place1)
+        pygame.display.update()
+        pygame.display.flip()
