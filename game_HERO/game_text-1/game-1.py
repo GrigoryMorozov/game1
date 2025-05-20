@@ -1,32 +1,30 @@
 import time
-from playsound import playsound
+import pygame
 import threading
 
-def pd(text, delay = 0.05):
+def pd(text, delay = 0.02):
     for char in text:
         print(char, end='', flush=True)
         time.sleep(delay)
     print()
     
-def play_music(music_file, stop_flag):
-    while not stop_flag.is_set():
-        playsound(music_file)
+def play_music(filename):
+    pygame.mixer.init()
+    pygame.mixer.music.load(filename)
+    pygame.mixer.music.play(-1)  # -1 означает бесконечное повторение
 
+def stop_music():
+    pygame.mixer.music.stop()
 
  
 def main():
-    stop_flag = threading.Event()
-    music_thread = threading.Thread(target=play_music, args=('01 - Opening.ogg', stop_flag))
-    music_thread.start()
+    play_music('assets/music/01 - Opening.ogg')
     pd('''----------------------------------------
 --------------Подземелье дракона--------
 ----------------------------------------''')
-    stop_flag.set()
-    music_thread.join()
-    stop_flag.clear() 
+    stop_music()
     
-    music_thread = threading.Thread(target=play_music, args=('09 - Z 339 - Here the Deities approve.ogg', stop_flag))
-    music_thread.start()
+    play_music('assets/music/09 - Z 339 - Here the Deities approve.ogg')
     pd('''В дни, когда земля помнила гул древних битв,
 а магия жила в трещинах скал, рыцарь в сверкающих
 доспехах шагнул к замку-исполину.
@@ -40,13 +38,10 @@ def main():
 а звук его доспехов стал заглушаться шёпотом ветра.
 Он понял, что попал в страшный лес, о котором ходили жуткие слухи. 
 ''')
+    stop_music()
+    
 
-    stop_flag.set()
-    music_thread.join()
-    stop_flag.clear()
-
-    music_thread = threading.Thread(target=play_music, args=('13 - Danger.ogg', stop_flag))
-    music_thread.start()
+    play_music('assets/music/13 - Danger.ogg')
     pd('''Темнота сгущалась, а шорохи вокруг
 становились всё настойчивее.
 Вдруг из-за деревьев вышел старик
@@ -62,16 +57,12 @@ def main():
 "Время бежит... но без оберега я обречён..."  
 ''')
 
+   
     
-
-    stop_flag.set()
-    music_thread.join()
-    stop_flag.clear()
-
     answer = int(input('Вариант 1: помочь старику. Вариант 2: Отказаться'))
+    stop_music()
     if answer == 1:
-        music_thread = threading.Thread(target=play_music, args=('14 - Barbarian King.ogg', stop_flag))
-        music_thread.start()
+        play_music('assets/music/14 - Barbarian King.ogg')
         pd('''Рыцарь:
 "Укажи, где искать и я постараюсь сделать всё возможное.
 Не оставлю тебя в беде,но у меня мало времени,старче.
@@ -93,13 +84,10 @@ def main():
 Рыцарь: "Благодарю. Теперь и вы сможете уйти отсюда?"  
 Старик (таинственно): "Мой путь иной... Иди, спаси короля. Твой час близок." 
 ''')
-        stop_flag.set()
-        music_thread.join()
-        stop_flag.clear()
+        stop_music()
 
     elif answer == 2:
-        music_thread = threading.Thread(target=play_music, args=('14 - Barbarian King.ogg', stop_flag))
-        music_thread.start()
+        play_music('assets/music/11 - Ostrich!.ogg')
         pd('''Рыцарь (сурово,но с уважением):
 "Прости, старик. Мой король ждёт меня.
 Мне доверили важную миссию и я не могу её провалить. "  
@@ -107,9 +95,7 @@ def main():
 "Судьба накажет твоё безразличие..."  
 Артур, немного плутая выходит к замку и сурово толкает тяжёлые двери.  
 ''')
-        stop_flag.set()
-        music_thread.join()
-        stop_flag.clear()        
+        stop_music()        
         
     
 
