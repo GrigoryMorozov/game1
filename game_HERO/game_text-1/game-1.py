@@ -2,11 +2,16 @@ import time
 import pygame
 import threading
 
+
+#  функция для плавного появления текста
 def pd(text, delay = 0.02):
     for char in text:
         print(char, end='', flush=True)
         time.sleep(delay)
     print()
+
+
+# функция для музыки
     
 def play_music(filename):
     pygame.mixer.init()
